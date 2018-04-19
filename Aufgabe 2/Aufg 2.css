@@ -22,7 +22,7 @@ h2 {
 }
 
 /* Spielinfo */
-#game-info {
+#playerInfo {
   height: 100vh;
   width: 22%;
   position: fixed;
@@ -33,32 +33,32 @@ h2 {
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
 }
-#game-info h2 {
+#playerInfo h2 {
   margin-bottom: 50px;
 }
-#game-info div {
+#playerInfo div {
   margin-bottom: 40px;
   text-align: center;
 }
-#game-info div span {
+#playerInfo div span {
   display: block;
 }
-#game-info .player-name {
+#playerInfo .player-name {
   font-weight: bold;
   color: #00FF00 ;
 }
 
 /* Spielbrett */
-#game-board {
+#cardField{
   height: auto;
   width: 78%;
   padding: 20px;
   box-sizing: border-box;
 }
-#game-board h2 {
+#cardField h2 {
   color: white;
 }
-#card-container {
+#card-div {
   position: relative;
   height: auto;
   width: 100%;
