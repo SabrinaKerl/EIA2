@@ -7,6 +7,7 @@ Ich habe diesen Code zusammen mit der Lerngruppe Gr�n geschrieben, angeleitet 
 */
 var Memory;
 (function (Memory) {
+    //Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf
     document.addEventListener("DOMContentLoaded", main);
     //Hinzuf�gen eines EventListener f�r das Dokument
     //"as DOMContentLoaded-Event wird ausgel�st, wenn das initiale HTML-Dokument vollst�ndig geladen und geparst ist."

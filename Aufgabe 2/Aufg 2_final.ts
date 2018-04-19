@@ -6,6 +6,7 @@ Datum: 17.04.2018
 Ich habe diesen Code zusammen mit der Lerngruppe Grün geschrieben, angeleitet von Melvin Busch.
 */
 namespace Memory {
+    //Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf
 
     document.addEventListener("DOMContentLoaded", main);
     //Hinzufügen eines EventListener für das Dokument
