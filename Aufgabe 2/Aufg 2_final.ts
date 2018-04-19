@@ -137,7 +137,7 @@ namespace Memory {
         // Ausgabe -> Array ist jetzt durchgemischt
     }
 
-    // Zufallsgenerator als eigene funktion -> schöner & funktioniert besser :D
+    /* Zufallsgenerator als eigene funktion -> schöner & funktioniert besser :D
     function randomState(): string {
         let randomState: number = Math.random();
         // zufällige Zahl rein speichern, mit ganz vielen Kommastellen zwischen 0 und 1
@@ -151,7 +151,7 @@ namespace Memory {
         } else if (randomState > .75) {
             // oder wenn: Wenn Zahl größer als 0,75 - dann Status: "visible"
             return "visible";
-        }
+        }*/
     }
 
 

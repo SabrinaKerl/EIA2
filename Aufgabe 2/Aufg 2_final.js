@@ -112,22 +112,5 @@ var Memory;
         var _a;
         // Ausgabe -> Array ist jetzt durchgemischt
     }
-    // Zufallsgenerator als eigene funktion -> sch�ner & funktioniert besser :D
-    function randomState() {
-        var randomState = Math.random();
-        // zuf�llige Zahl rein speichern, mit ganz vielen Kommastellen zwischen 0 und 1
-        if (randomState <= .5) {
-            // 50%ige Wahrscheinlichkeit, dass die Karte den Status: "hidden" hat
-            return "hidden";
-        }
-        else if (randomState > .5 && randomState <= .75) {
-            // oder wenn: wenn Zahl gr��er als 0,5 und kleiner gleich 0,75 - dann Status: "taken"
-            return "taken";
-        }
-        else if (randomState > .75) {
-            // oder wenn: Wenn Zahl gr��er als 0,75 - dann Status: "visible"
-            return "visible";
-        }
-    }
 })(Memory || (Memory = {}));
 //# sourceMappingURL=Aufg 2_final.js.map
