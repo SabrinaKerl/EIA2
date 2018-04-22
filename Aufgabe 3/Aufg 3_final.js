@@ -1,13 +1,13 @@
 /*
-Aufgabe: 2 DynHTML - Memory
+Aufgabe: 3 Events - Memory
 Name: Kerl, Sabrina
 Matrikel: 257167
-Datum: 17.04.2018
-Ich habe diesen Code zusammen mit der Lerngruppe Gr�n geschrieben, angeleitet von Melvin Busch.
+Datum: 22.04.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
 var Memory;
 (function (Memory) {
-    //>>>>Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf<<<<
+    //>>>>Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf, functions<<<<
     document.addEventListener("DOMContentLoaded", main);
     //Hinzuf�gen eines EventListener f�r das Dokument
     //"as DOMContentLoaded-Event wird ausgel�st, wenn das initiale HTML-Dokument vollst�ndig geladen und geparst ist."
@@ -113,5 +113,84 @@ var Memory;
         var _a;
         // Ausgabe -> Array ist jetzt durchgemischt
     }
+    /* Zufallsgenerator als eigene funktion -> sch�ner & funktioniert besser :D
+    function randomState(): string {
+        let randomState: number = Math.random();
+        // zuf�llige Zahl rein speichern, mit ganz vielen Kommastellen zwischen 0 und 1
+        if (randomState <= .5) {
+            // 50%ige Wahrscheinlichkeit, dass die Karte den Status: "hidden" hat
+            return "hidden";
+            // Status = hidden
+        } else if (randomState > .5 && randomState <= .75) {
+            // oder wenn: wenn Zahl gr��er als 0,5 und kleiner gleich 0,75 - dann Status: "taken"
+            return "taken";
+        } else if (randomState > .75) {
+            // oder wenn: Wenn Zahl gr��er als 0,75 - dann Status: "visible"
+            return "visible";
+        }*/
+    function eventHandler(_event) {
+        var target = _event.target;
+        // gibt ausl�sendes HTMLElement zur�ck
+        if (target.classList.contains("card")) {
+            // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zur�ck. Diese Eigenschaft ist n�tzlich, um CSS-Klassen f�r ein Element hinzuzuf�gen, zu entfernen und umzuschalten."
+            openCards++;
+            //z�hlt mit, wie viele Karten den Status "aufgedeckt" haben
+            if (cardClass.classList.contains("hidden")) {
+                // wenn "hidden" enthalten dann...
+                cardClass.classList.remove("hidden");
+                // ...entferne "hidden" und...
+                cardClass.classList.add("visible");
+            }
+        }
+        if (openCards == 2) {
+            // wenn der Z�hler der aufgedeckten Karten den Wert 2 erreicht, dann...
+            setTimeOut(cardsCompare, 2000);
+        }
+        if (openCards >= 2) {
+            // wenn der Z�hler der aufgedeckten Karten einen gr��er-gleichen Wert als 2 erreicht, dann...
+            cardClass.classList.remove("visible");
+            // ...entferne Status "visible" und...
+            cardClass.classList.add("hidden");
+        }
+    }
+    function matchCards() {
+        var openArray = filterCardsByClass("visible");
+        // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausf�hren soll
+        if (openArray[0].children[0].innerHTML == openArray[1].children[0].innerHTML) {
+            // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
+            for (var s = 0; s > openArray.length; s++) {
+                // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; z�hle mit
+                openArray[s].classList.remove("visible");
+                // entferne  "visible"
+                openArray[s].classList.add("taken");
+            }
+        }
+        else {
+            for (var s = 0; s < openArray.length; s++) {
+                // siehe oben
+                openArray[s].classList.remove("visible");
+                // entferne "visible"
+                openArray[s].classList.add("hidden");
+            }
+        }
+        winAlert();
+        // Aufruf Funktion
+        openArray = [];
+        // Aufruf Array
+        openCards = 0;
+        // openCards erh�lt den Wert 0
+    }
+    function winAlert() {
+        var cardsTaken = filterCardsByClass("hidden");
+        // lass cardsTaken in HTMLElement Array sein, welches die Funktion filterCardsByClass ausf�hren soll
+        if (cardsTaken.length == 0) {
+            // wenn alle Karten den Status "taken" haben erscheint der Gewinnalarm
+            alert("Glueckwunsch, Du hast das Spiel beendet!");
+        }
+        cardsTaken = [];
+    }
+    function filterCardsByClass(_filter) {
+        return cardArray.filter(function (card) { return card.classList.contains(_filter); });
+    }
 })(Memory || (Memory = {}));
-//# sourceMappingURL=Aufg 2_final.js.map
+//# sourceMappingURL=Aufg 3_final.js.map

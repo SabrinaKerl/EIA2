@@ -1,12 +1,12 @@
 /*
-Aufgabe: 2 DynHTML - Memory
+Aufgabe: 3 Events - Memory
 Name: Kerl, Sabrina
 Matrikel: 257167
-Datum: 17.04.2018
-Ich habe diesen Code zusammen mit der Lerngruppe Grün geschrieben, angeleitet von Melvin Busch.
+Datum: 22.04.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
 namespace Memory {
-    //>>>>Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf<<<<
+    //>>>>Reihenfolge Code: DOM, alle Variablen, Hauptfunktionen/Hauptablauf, functions<<<<
 
     document.addEventListener("DOMContentLoaded", main);
     //Hinzufügen eines EventListener für das Dokument
@@ -153,7 +153,82 @@ namespace Memory {
             // oder wenn: Wenn Zahl größer als 0,75 - dann Status: "visible"
             return "visible";
         }*/
-    }
-
-
+    
+    function eventHandler (_event: MouseEvent): void {
+        let target: HTMLElement = <HTMLElement>_event.target;
+        // gibt auslösendes HTMLElement zurück
+        if (target.classList.contains ("card")) {
+            // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zurück. Diese Eigenschaft ist nützlich, um CSS-Klassen für ein Element hinzuzufügen, zu entfernen und umzuschalten."
+            openCards ++;
+            //zählt mit, wie viele Karten den Status "aufgedeckt" haben
+            if (cardClass.classList.contains ("hidden")) {
+                // wenn "hidden" enthalten dann...
+                cardClass.classList.remove ("hidden");
+                // ...entferne "hidden" und...
+                cardClass.classList.add ("visible");
+                // ...füge "visible" hinzu
+                }
+            }
+        
+        if (openCards == 2) {
+            // wenn der Zähler der aufgedeckten Karten den Wert 2 erreicht, dann...
+            setTimeOut (cardsCompare, 2000);
+            // ...setze den TimeOut auf 2 Sekunden Verzögerung
+            }
+        
+        if (openCards >= 2) {
+            // wenn der Zähler der aufgedeckten Karten einen größer-gleichen Wert als 2 erreicht, dann...
+            cardClass.classList.remove ("visible");
+            // ...entferne Status "visible" und...
+            cardClass.classList.add ("hidden");
+            // ...füge Status "hidden" hinzu
+            }
+        }
+    
+    function matchCards (): void {
+        let openArray: HTMLElement [] = filterCardsByClass ("visible");
+        // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausführen soll
+        if (openArray [0].children [0]. innerHTML == openArray [1]. children [0]. innerHTML) {
+            // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
+            for (let s: number = 0; s > openArray.length; s++) {
+                // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; zähle mit
+                openArray [s]. classList. remove ("visible");
+                // entferne  "visible"
+                openArray [s]. classList. add ("taken");
+                // füge "taken" hinzu
+                }
+            }
+        
+        else {
+            for (let s: number = 0; s < openArray.length; s++) {
+                // siehe oben
+                openArray [s]. classList. remove ("visible"); 
+                // entferne "visible"
+                openArray [s]. classList. add ("hidden");
+                // füge "hidden" hinzu
+                }
+            }
+        
+        winAlert ();
+        // Aufruf Funktion
+        openArray = []; 
+        // Aufruf Array
+        openCards = 0;
+        // openCards erhält den Wert 0
+        }
+    
+    function winAlert (): void {
+        let cardsTaken: HTMLElement [] = filterCardsByClass ("hidden");
+        // lass cardsTaken in HTMLElement Array sein, welches die Funktion filterCardsByClass ausführen soll
+        if (cardsTaken.length == 0) {
+            // wenn alle Karten den Status "taken" haben erscheint der Gewinnalarm
+            alert ("Glueckwunsch, Du hast das Spiel beendet!");
+            }
+        
+        cardsTaken = [];
+        }
+    
+    function filterCardsByClass (_filter: string): HTMLElement [] {
+        return cardArray. filter (card => card.classList.contains (_filter));
+        }            
 }
