@@ -122,10 +122,10 @@ var Memory;
         // gibt ausl�sendes HTMLElement zur�ck
         if (cardClass.classList.contains("card")) {
             // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zur�ck. Diese Eigenschaft ist n�tzlich, um CSS-Klassen f�r ein Element hinzuzuf�gen, zu entfernen und umzuschalten."
-            openCards++;
             //z�hlt mit, wie viele Karten den Status "aufgedeckt" haben
             if (cardClass.classList.contains("hidden")) {
                 // wenn "hidden" enthalten dann...
+                openCards++;
                 cardClass.classList.remove("hidden");
                 // ...entferne "hidden" und...
                 cardClass.classList.add("visible");
@@ -134,8 +134,10 @@ var Memory;
         if (openCards == 2) {
             // wenn der Z�hler der aufgedeckten Karten den Wert 2 erreicht, dann...
             setTimeout(matchCards, 2000);
+            console.log("Karten werden verglichen");
         }
-        if (openCards > 2) {
+        if (openCards >= 2) {
+            console.log("mehr als 2 sind offen");
             // wenn der Z�hler der aufgedeckten Karten einen gr��er-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove("visible");
             // ...entferne Status "visible" und...

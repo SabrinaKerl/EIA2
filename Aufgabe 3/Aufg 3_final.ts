@@ -149,10 +149,10 @@ namespace Memory {
         // gibt auslösendes HTMLElement zurück
         if (cardClass.classList.contains ("card")) {
             // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zurück. Diese Eigenschaft ist nützlich, um CSS-Klassen für ein Element hinzuzufügen, zu entfernen und umzuschalten."
-            openCards ++;
             //zählt mit, wie viele Karten den Status "aufgedeckt" haben
             if (cardClass.classList.contains ("hidden")) {
                 // wenn "hidden" enthalten dann...
+                openCards ++;
                 cardClass.classList.remove ("hidden");
                 // ...entferne "hidden" und...
                 cardClass.classList.add ("visible");
@@ -163,10 +163,12 @@ namespace Memory {
         if (openCards == 2) {
             // wenn der Zähler der aufgedeckten Karten den Wert 2 erreicht, dann...
             setTimeout (matchCards, 2000);
+            console.log("Karten werden verglichen");
             // ...setze den TimeOut auf 2 Sekunden Verzögerung
             }
         
-        if (openCards > 2) {
+        if (openCards >= 2) {
+            console.log("mehr als 2 sind offen");
             // wenn der Zähler der aufgedeckten Karten einen größer-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove ("visible");
             // ...entferne Status "visible" und...
@@ -176,15 +178,15 @@ namespace Memory {
         }
     
     function matchCards (): void {
-        let openArray: HTMLElement [] = filterCardsByClass ("visible");
+        let openArray: HTMLElement[] = filterCardsByClass ("visible");
         // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausführen soll
-        if (openArray [0].children [0]. innerHTML == openArray [1]. children [0]. innerHTML) {
+        if (openArray[0].children[0].innerHTML == openArray[1].children[0].innerHTML) {
             // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
             for (let s: number = 0; s > openArray.length; s++) {
                 // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; zähle mit
-                openArray [s]. classList. remove ("visible");
+                openArray[s].classList.remove ("visible");
                 // entferne  "visible"
-                openArray [s]. classList. add ("taken");
+                openArray[s].classList.add ("taken");
                 // füge "taken" hinzu
                 }
             }
@@ -192,9 +194,9 @@ namespace Memory {
         else {
             for (let s: number = 0; s < openArray.length; s++) {
                 // siehe oben
-                openArray [s]. classList. remove ("visible"); 
+                openArray[s].classList.remove ("visible"); 
                 // entferne "visible"
-                openArray [s]. classList. add ("hidden");
+                openArray[s].classList.add ("hidden");
                 // füge "hidden" hinzu
                 }
             }
