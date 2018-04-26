@@ -21,6 +21,9 @@ namespace Memory {
     let cardArray: HTMLElement[] = [];
     // leeres Array, in das die für das Spiel benötigten Karten als divs hineingespeichert werden
 
+    let openArray: string[] = [];
+    let openCards: number = 0;
+    
     let numPairs: number;
     let numPlayers: number;
     //Festlegung, dass numPairs/numPlayers vom Typ numbers sind
@@ -51,9 +54,9 @@ namespace Memory {
         // Spielkarten erzeugen
         for (let i: number = 0; i < numPairs; i++) {
             //Beginn des Zählvorgangs bei 0
-            createCard(cardContent[i], randomState());
+            createCard(cardContent[i]);
             // cardContent an der Stelle i - wird als Übergabeparameter mitgegeben
-            createCard(cardContent[i], randomState());
+            createCard(cardContent[i]);
             // cardContent an der Stelle i - wird als Übergabeparameter mitgegeben
             //random state nur Status, kein Mischen! wird zweimal ausgeführt, da zwei Karten pro Spielgang aufgedeckt werden
         }
@@ -72,6 +75,8 @@ namespace Memory {
             createPlayer(score, name + [i + 1]);
             // Aufruf der Funktion - score wird mitgegeben und die Variable name + Nummer des Spielers, die hochzählt; +1 damit Anzeigestart bei 1
         }
+        
+        cardField.addEventListener("click", clickHandler);
     }
 
     function cardPairs(): void {
@@ -94,16 +99,17 @@ namespace Memory {
         }
     }
 
-    function createCard(_textDerAufDieKarteSoll: string, _state: string): void {
+    function createCard(_textDerAufDieKarteSoll: string): void {
         //Inhalt der Karte + Status (verdeckt/genommen/offen)
         //"Eine Funktion ist ein Codeblock, der für die Ausführung einer bestimmten Aufgabe entwickelt wurde; sie wird ausgeführt, wenn sie "aufgerufen" wird."
         //vor Parametern immer Unterstrich!
         let card: HTMLElement = document.createElement("div");
         // div erzeugen für Karten
-        card.innerText = _textDerAufDieKarteSoll;
+        card.innerHTML = `<span>${_textDerAufDieKarteSoll}</span>`;
+        // //  innerHTML erwartet string `` | span = HTMLElement Container mit spezifischer Zuweisung | $ = 'string' + variable + 'string'
         // Text aus dem Array soll auf eine Karte 
         //***warum ist Zugriff auf cardContent array möglich?!***
-        card.setAttribute("class", "card " + _state);
+        card.setAttribute("class", "card hidden");
         // Attribut hinzufügen: class = Welches Attribut (hier eine Klasse); card = zugehöriger Wert aus dem CSS Dokument
         cardArray.push(card);
         // cardArray = Array vom Anfang; Speicher für alle erzeugten Karten, die durch ".push" hinzugefügt werden
@@ -138,26 +144,10 @@ namespace Memory {
         // Ausgabe -> Array ist jetzt durchgemischt
     }
 
-    /* Zufallsgenerator als eigene funktion -> schöner & funktioniert besser :D
-    function randomState(): string {
-        let randomState: number = Math.random();
-        // zufällige Zahl rein speichern, mit ganz vielen Kommastellen zwischen 0 und 1
-        if (randomState <= .5) {
-            // 50%ige Wahrscheinlichkeit, dass die Karte den Status: "hidden" hat
-            return "hidden";
-            // Status = hidden
-        } else if (randomState > .5 && randomState <= .75) {
-            // oder wenn: wenn Zahl größer als 0,5 und kleiner gleich 0,75 - dann Status: "taken"
-            return "taken";
-        } else if (randomState > .75) {
-            // oder wenn: Wenn Zahl größer als 0,75 - dann Status: "visible"
-            return "visible";
-        }*/
-    
-    function eventHandler (_event: MouseEvent): void {
-        let target: HTMLElement = <HTMLElement>_event.target;
+    function clickHandler (_event: MouseEvent): void {
+        let cardClass: HTMLElement = <HTMLElement>_event.target;
         // gibt auslösendes HTMLElement zurück
-        if (target.classList.contains ("card")) {
+        if (cardClass.classList.contains ("card")) {
             // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zurück. Diese Eigenschaft ist nützlich, um CSS-Klassen für ein Element hinzuzufügen, zu entfernen und umzuschalten."
             openCards ++;
             //zählt mit, wie viele Karten den Status "aufgedeckt" haben
@@ -172,11 +162,11 @@ namespace Memory {
         
         if (openCards == 2) {
             // wenn der Zähler der aufgedeckten Karten den Wert 2 erreicht, dann...
-            setTimeOut (cardsCompare, 2000);
+            setTimeout (matchCards, 2000);
             // ...setze den TimeOut auf 2 Sekunden Verzögerung
             }
         
-        if (openCards >= 2) {
+        if (openCards > 2) {
             // wenn der Zähler der aufgedeckten Karten einen größer-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove ("visible");
             // ...entferne Status "visible" und...

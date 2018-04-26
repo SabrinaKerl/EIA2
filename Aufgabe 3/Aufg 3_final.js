@@ -17,6 +17,8 @@ var Memory;
     //Karteninhalt ist Typ String, wird in ein Array gepackt
     var cardArray = [];
     // leeres Array, in das die f�r das Spiel ben�tigten Karten als divs hineingespeichert werden
+    var openArray = [];
+    var openCards = 0;
     var numPairs;
     var numPlayers;
     //Festlegung, dass numPairs/numPlayers vom Typ numbers sind
@@ -40,9 +42,9 @@ var Memory;
         // Spielkarten erzeugen
         for (var i = 0; i < numPairs; i++) {
             //Beginn des Z�hlvorgangs bei 0
-            createCard(cardContent[i], randomState());
+            createCard(cardContent[i]);
             // cardContent an der Stelle i - wird als �bergabeparameter mitgegeben
-            createCard(cardContent[i], randomState());
+            createCard(cardContent[i]);
         }
         randomMix(cardArray);
         // Karten mischen - Funktionsaufruf!
@@ -54,6 +56,7 @@ var Memory;
             // Spieler Anzeige generieren
             createPlayer(score, name + [i + 1]);
         }
+        cardField.addEventListener("click", clickHandler);
     }
     function cardPairs() {
         numPairs = parseInt(prompt("Bitte die Anzahl der Kartenpaare festlegen", "5 - 10 Kartenpaare"), 10);
@@ -71,16 +74,17 @@ var Memory;
             numsPlayer();
         }
     }
-    function createCard(_textDerAufDieKarteSoll, _state) {
+    function createCard(_textDerAufDieKarteSoll) {
         //Inhalt der Karte + Status (verdeckt/genommen/offen)
         //"Eine Funktion ist ein Codeblock, der f�r die Ausf�hrung einer bestimmten Aufgabe entwickelt wurde; sie wird ausgef�hrt, wenn sie "aufgerufen" wird."
         //vor Parametern immer Unterstrich!
         var card = document.createElement("div");
         // div erzeugen f�r Karten
-        card.innerText = _textDerAufDieKarteSoll;
+        card.innerHTML = "<span>" + _textDerAufDieKarteSoll + "</span>";
+        // //  innerHTML erwartet string `` | span = HTMLElement Container mit spezifischer Zuweisung | $ = 'string' + variable + 'string'
         // Text aus dem Array soll auf eine Karte 
         //***warum ist Zugriff auf cardContent array m�glich?!***
-        card.setAttribute("class", "card " + _state);
+        card.setAttribute("class", "card hidden");
         // Attribut hinzuf�gen: class = Welches Attribut (hier eine Klasse); card = zugeh�riger Wert aus dem CSS Dokument
         cardArray.push(card);
         // cardArray = Array vom Anfang; Speicher f�r alle erzeugten Karten, die durch ".push" hinzugef�gt werden
@@ -113,25 +117,10 @@ var Memory;
         var _a;
         // Ausgabe -> Array ist jetzt durchgemischt
     }
-    /* Zufallsgenerator als eigene funktion -> sch�ner & funktioniert besser :D
-    function randomState(): string {
-        let randomState: number = Math.random();
-        // zuf�llige Zahl rein speichern, mit ganz vielen Kommastellen zwischen 0 und 1
-        if (randomState <= .5) {
-            // 50%ige Wahrscheinlichkeit, dass die Karte den Status: "hidden" hat
-            return "hidden";
-            // Status = hidden
-        } else if (randomState > .5 && randomState <= .75) {
-            // oder wenn: wenn Zahl gr��er als 0,5 und kleiner gleich 0,75 - dann Status: "taken"
-            return "taken";
-        } else if (randomState > .75) {
-            // oder wenn: Wenn Zahl gr��er als 0,75 - dann Status: "visible"
-            return "visible";
-        }*/
-    function eventHandler(_event) {
-        var target = _event.target;
+    function clickHandler(_event) {
+        var cardClass = _event.target;
         // gibt ausl�sendes HTMLElement zur�ck
-        if (target.classList.contains("card")) {
+        if (cardClass.classList.contains("card")) {
             // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zur�ck. Diese Eigenschaft ist n�tzlich, um CSS-Klassen f�r ein Element hinzuzuf�gen, zu entfernen und umzuschalten."
             openCards++;
             //z�hlt mit, wie viele Karten den Status "aufgedeckt" haben
@@ -144,9 +133,9 @@ var Memory;
         }
         if (openCards == 2) {
             // wenn der Z�hler der aufgedeckten Karten den Wert 2 erreicht, dann...
-            setTimeOut(cardsCompare, 2000);
+            setTimeout(matchCards, 2000);
         }
-        if (openCards >= 2) {
+        if (openCards > 2) {
             // wenn der Z�hler der aufgedeckten Karten einen gr��er-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove("visible");
             // ...entferne Status "visible" und...

@@ -14,7 +14,7 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 body {
   font-family: 'Cute Font', cursive;
   font-size: 25px;
-  /*background: #333;*/
+  background: #333;
 }
 h2 {
   text-align: center;
@@ -22,32 +22,30 @@ h2 {
 }
 
 /* Spielinfo */
-#playerInfo {
+#player-info {
   height: 100vh;
   width: 22%;
   position: fixed;
   right: 0;
   top: 0;
-  /*background: #DCDCDC;*/
+  background: #DCDCDC;
   padding: 20px;
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
 }
-#playerInfo h2 {
+#player-info h2 {
   margin-bottom: 50px;
 }
-#playerInfo div {
+#player-info div {
   margin-bottom: 40px;
   text-align: center;
-  border: black solid 1px;
 }
-#playerInfo div span {
+#player-info div span {
   display: block;
 }
-#playerInfo .player-name {
+#player-info .player-name {
   font-weight: bold;
   color: #00FF00 ;
-  background-color: #00FF00 ;
 }
 
 /* Spielbrett */
@@ -74,17 +72,36 @@ h2 {
   width: 175px;
   border-radius: 5px;
   margin: 0px 20px 20px 0px;
-  cursor: pointer;
+  /*cursor: pointer;*/
   text-align: center;
   line-height: 175px;
   position: relative;
   background: white;
-  transition: all 1s ease-in-out;
+  /*transition: all 1s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
-  pointer-events: auto;
+  pointer-events: auto;*/
 }
-.card::after {
+
+.hidden {
+	background: #00FF00;
+	cursor: pointer;
+}
+
+.hidden span {
+	display:none;
+}
+
+.taken {
+	border: 2px solid rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    box-sizing: border-box;
+}
+
+.taken span {
+	display: none;
+}
+/*.card::after {
   content: "";
   position: absolute;
   top: 0;
@@ -103,5 +120,5 @@ h2 {
   transform: rotateY(180deg);
 }
 .taken {
-  transform: scale(0);
+  transform: scale(0);*/
 }
