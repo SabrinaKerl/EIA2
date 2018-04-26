@@ -134,10 +134,8 @@ var Memory;
         if (openCards == 2) {
             // wenn der Z�hler der aufgedeckten Karten den Wert 2 erreicht, dann...
             setTimeout(matchCards, 2000);
-            console.log("Karten werden verglichen");
         }
-        if (openCards >= 2) {
-            console.log("mehr als 2 sind offen");
+        if (openCards > 2) {
             // wenn der Z�hler der aufgedeckten Karten einen gr��er-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove("visible");
             // ...entferne Status "visible" und...
@@ -149,7 +147,7 @@ var Memory;
         // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausf�hren soll
         if (openArray[0].children[0].innerHTML == openArray[1].children[0].innerHTML) {
             // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
-            for (var s = 0; s > openArray.length; s++) {
+            for (var s = 0; s < openArray.length; s++) {
                 // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; z�hle mit
                 openArray[s].classList.remove("visible");
                 // entferne  "visible"

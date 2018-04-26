@@ -153,9 +153,9 @@ namespace Memory {
             if (cardClass.classList.contains ("hidden")) {
                 // wenn "hidden" enthalten dann...
                 openCards ++;
-                cardClass.classList.remove ("hidden");
+                cardClass.classList.remove("hidden");
                 // ...entferne "hidden" und...
-                cardClass.classList.add ("visible");
+                cardClass.classList.add("visible");
                 // ...füge "visible" hinzu
                 }
             }
@@ -163,12 +163,12 @@ namespace Memory {
         if (openCards == 2) {
             // wenn der Zähler der aufgedeckten Karten den Wert 2 erreicht, dann...
             setTimeout (matchCards, 2000);
-            console.log("Karten werden verglichen");
             // ...setze den TimeOut auf 2 Sekunden Verzögerung
+            /*cardClass.classList.remove ("hidden");
+            cardClass.classList.add ("visible");*/
             }
         
-        if (openCards >= 2) {
-            console.log("mehr als 2 sind offen");
+        if (openCards > 2) {
             // wenn der Zähler der aufgedeckten Karten einen größer-gleichen Wert als 2 erreicht, dann...
             cardClass.classList.remove ("visible");
             // ...entferne Status "visible" und...
@@ -177,26 +177,26 @@ namespace Memory {
             }
         }
     
-    function matchCards (): void {
-        let openArray: HTMLElement[] = filterCardsByClass ("visible");
+    function matchCards (): void { 
+        let openArray: HTMLElement[] = filterCardsByClass("visible");
         // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausführen soll
         if (openArray[0].children[0].innerHTML == openArray[1].children[0].innerHTML) {
             // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
-            for (let s: number = 0; s > openArray.length; s++) {
+            for (let s: number = 0; s < openArray.length; s++) {
                 // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; zähle mit
-                openArray[s].classList.remove ("visible");
+                openArray[s].classList.remove("visible");
                 // entferne  "visible"
-                openArray[s].classList.add ("taken");
+                openArray[s].classList.add("taken");
                 // füge "taken" hinzu
-                }
+                }  
             }
         
         else {
             for (let s: number = 0; s < openArray.length; s++) {
                 // siehe oben
-                openArray[s].classList.remove ("visible"); 
+                openArray[s].classList.remove("visible"); 
                 // entferne "visible"
-                openArray[s].classList.add ("hidden");
+                openArray[s].classList.add("hidden");
                 // füge "hidden" hinzu
                 }
             }
@@ -210,17 +210,17 @@ namespace Memory {
         }
     
     function winAlert (): void {
-        let cardsTaken: HTMLElement [] = filterCardsByClass ("hidden");
+        let cardsTaken: HTMLElement[] = filterCardsByClass ("hidden");
         // lass cardsTaken in HTMLElement Array sein, welches die Funktion filterCardsByClass ausführen soll
         if (cardsTaken.length == 0) {
             // wenn alle Karten den Status "taken" haben erscheint der Gewinnalarm
-            alert ("Glueckwunsch, Du hast das Spiel beendet!");
+            alert("Glueckwunsch, Du hast das Spiel beendet!");
             }
         
         cardsTaken = [];
         }
     
-    function filterCardsByClass (_filter: string): HTMLElement [] {
-        return cardArray. filter (card => card.classList.contains (_filter));
+    function filterCardsByClass(_filter: string): HTMLElement[] {
+        return cardArray.filter(card => card.classList.contains(_filter));
         }            
 }
