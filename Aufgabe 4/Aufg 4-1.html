@@ -1,0 +1,64 @@
+<!--
+Aufgabe: 4 FormElements und Interfaces
+Name: Kerl, Sabrina
+Matrikel: 257167
+Datum: 03.05.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aufgabe 4 - Memory</title>
+  <meta charset="utf-8" />
+  <script src="Aufg 4-1_Memory.js"></script>
+  <script src="Aufg 4-1.js"></script>
+  <link rel="stylesheet" href="Aufg 4-1.css">
+</head>
+<body>
+	<div id="interface"> 
+		<div id="player">
+			<h2>Anzahl Spieler</h2>
+				<input type="radio" name="Radiogroup" value="spieler1" id="spieler1" />
+				<label for="spieler1">1 Spieler</label>
+				<input type="radio" name="Radiogroup" value="spieler2" id="spieler2"/>
+				<label for="spieler2">2 Spieler</label>
+				<input type="radio" name="Radiogroup" value="spieler3" id="spieler3"/>
+				<label for="spieler3">3 Spieler</label>
+				<input type="radio" name="Radiogroup" value="spieler4" id="spieler4"/>
+				<label for="spieler4">4 Spieler</label>
+		</div>
+		<br>
+		<div id="name">
+			<h2>Name Spieler</h2>
+				<h4 id="player1-label">Spieler 1</h4>
+		        <input id="player1" type="text" name="Text" placeholder="Hier den Namen eingeben" value="" required />
+		        <h4 id="player2-label" style="opacity: 0.0;">Spieler 2</h4>
+		        <input id="player2" type="text" name="Text" placeholder="Hier den Namen eingeben" value="" disabled/>
+		        <h4 id="player3-label" style="opacity: 0.0;">Spieler 3</h4>
+		        <input id="player3" type="text" name="Text" placeholder="Hier den Namen eingeben" value="" disabled/>
+		        <h4 id="player4-label" style="opacity: 0.0;">Spieler 4</h4>
+				<input id="player4" type="text" name="Text" placeholder="Hier den Namen eingeben" value="" disabled/>
+		</div>
+		<br>
+		<br>
+		<select name="Select" id="select">
+			<option value="Früchte">Früchte</option>
+			<option value="Tiere">Tiere</option>
+			<option value="Städte">Städte</option>
+		</select>
+		<br>
+		<div id="pairs">
+        <h3>Kartenpaare</h3>
+        <input id="cardPairs" type="range" name="Stepper" step="1" min="5" max="10" value="5" oninput="Aufgabe_5.onInputEvent(this.value)"/>
+        <label for="kartenpaare" id="cardPairsLabel">5</label>
+	    </div>
+	    <br>
+	    <div id="spielstart">
+	        <button onclick="Aufgabe_5.main()">Spiel starten</button>
+	    </div>
+		</div id="cardBoard">
+			<div id="player-info">
+			<div id="cardField">
+		    <div id="card-div"> </div>   
+</body>
+</html>
