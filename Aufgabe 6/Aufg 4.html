@@ -1,0 +1,50 @@
+<!--
+Aufgabe: 4 Forms and Interface
+Name: Kerl, Sabrina
+Matrikel: 257167
+Datum: 26.04.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Aufg 4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="Aufg 4.css" type="text/css" media="screen"/>
+<script src="Aufg4_Interfaces.js" type="text/javascript" charset="utf-8"></script>
+<script src="Aufg 4.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<fieldset id="input">
+		<legend> Type student data here </legend>
+		<input type="text" name="name" placeholder="name"/><br>
+		<input type="text" name="firstname" placeholder="firstname"/><br>
+		<input type="text" name="matrikel" placeholder="matrikel"/><br>
+		<input type="number" name="age" placeholder="age" min="1" max="120"/><br>
+		<input type="text" name="Datalist" list="options" placeholder="major"/>
+		<datalist id="options">
+			<option value="MKB"> </option>
+			<option value="OMB"> </option>
+			<option value="MIB"> </option>		
+		</datalist>
+		<br>
+		<input type="radio" name="gender" value="male" id="male"/>
+		<label for="male">Male</label>
+		<input type="radio" name="gender" value="female" id="female"/>
+		<label for="female">Female</label><br>
+		<br>
+		<button type="button" id="insert">Insert to database</button>
+	</fieldset>
+	<fieldset id="output">
+		<legend> All student data </legend>
+		<button type="button" id="refresh">Refresh</button>
+		<textarea rows="10" cols="90"> </textarea>
+	</fieldset>
+	<fieldset>
+		<legend>Search Student</legend>
+		<input type="text" name="matrikelno" placeholder="Enter Matrikel"/>
+		<button type="button" id="search">Search</button>
+		<textarea rows="5" cols="90"></textarea>
+	</fieldset>
+</body>
+</html>
