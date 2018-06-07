@@ -5,11 +5,9 @@ Matrikel: 257167
 Datum: 26.04.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
-var Aufg4_Formular;
-(function (Aufg4_Formular) {
-    // Simples Array zum Speichern der Studi-Datens�tze (nur zur Demonstration)
-    Aufg4_Formular.studiSimpleArray = [];
+var Aufgabe6;
+(function (Aufgabe6) {
     // Homogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
-    Aufg4_Formular.studiHomoAssoc = {};
-})(Aufg4_Formular || (Aufg4_Formular = {}));
+    Aufgabe6.studiHomoAssoc = {};
+})(Aufgabe6 || (Aufgabe6 = {}));
 //# sourceMappingURL=Aufg4_Interfaces.js.map
