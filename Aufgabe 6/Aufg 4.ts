@@ -9,7 +9,7 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 namespace Aufgabe6 {
 
     window.addEventListener("load", init);
-    let address: string = "https://eia2node-franziheiss.herokuapp.com";
+    let address: string = "https://eia2.herokuapp.com";
 
     let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
 
