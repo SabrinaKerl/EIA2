@@ -8,7 +8,7 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 var Aufgabe6;
 (function (Aufgabe6) {
     window.addEventListener("load", init);
-    let address = "https://eia2node-franziheiss.herokuapp.com";
+    let address = "https://eia2.herokuapp.com";
     let inputs = document.getElementsByTagName("input");
     function init(_event) {
         console.log("Init");
