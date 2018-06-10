@@ -10,35 +10,52 @@ namespace Memory {
     //Kartendecks
     
     //**Objekt Interface**
-    interface Deck {
+    export interface Deck {
         content: string[];
         color: string;
         font: string;
-        size: number;        
+        count: string;        
     }
+    
+    export let deck: Deck;
     
     export interface Decks {
         [deckName: string]: Deck;
-        }
+        };
     
-    let fruechte: Deck = {
+    export let decks: Decks = {};
+        deck = {
         content: ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"],
         color: "hsla (120,100%,50%,0.3)",
         font: "Arial",
-        size: 10
+        count: "10"
         };
     
-    let tiere: Deck = {
+    decks["fruechte"] = deck;
+    
+        deck = {
         content: ["Affe", "Nashorn", "Giraffe", "Bär", "Panda", "Schlange", "Wal", "Robbe", "Hund", "Katze", "Maus", "Delfin", "Adler", "Kiwi", "Känguru"],
         color: "hsla (120,100%,75%,0.3)",   
         font: "TimesNewRoman",
-        size: 12
+        count: "12"
         };
     
-    let staedte: Deck = {
+    decks["tiere"] = deck;
+    
+        deck = {
         content: ["Berlin", "Prag", "Rom", "Oslo", "Stockholm", "Madrid", "Brüssel", "Kopenhagen", "London", "Reykjavik", "Athen", "Sofia", "Moskau", "Lissabon", "Amsterdam", "Paris", "Ankara"],
         color: "hsla (120,60%,70%,0.3)",
         font: "Calibri",
-        size: 15
+        count: "15"
         };
+    
+    decks["staedte"] = deck;
+    
+     export interface Scoreboard {
+                player: string;
+                score: number;
+      }
+    
+     export let scoreboard: Scoreboard[] = [];
+
     }

@@ -7,23 +7,29 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 */
 var Memory;
 (function (Memory) {
-    var fruechte = {
+    ;
+    Memory.decks = {};
+    Memory.deck = {
         content: ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"],
         color: "hsla (120,100%,50%,0.3)",
         font: "Arial",
-        size: 10
+        count: "10"
     };
-    var tiere = {
+    Memory.decks["fruechte"] = Memory.deck;
+    Memory.deck = {
         content: ["Affe", "Nashorn", "Giraffe", "B�r", "Panda", "Schlange", "Wal", "Robbe", "Hund", "Katze", "Maus", "Delfin", "Adler", "Kiwi", "K�nguru"],
         color: "hsla (120,100%,75%,0.3)",
         font: "TimesNewRoman",
-        size: 12
+        count: "12"
     };
-    var staedte = {
+    Memory.decks["tiere"] = Memory.deck;
+    Memory.deck = {
         content: ["Berlin", "Prag", "Rom", "Oslo", "Stockholm", "Madrid", "Br�ssel", "Kopenhagen", "London", "Reykjavik", "Athen", "Sofia", "Moskau", "Lissabon", "Amsterdam", "Paris", "Ankara"],
         color: "hsla (120,60%,70%,0.3)",
         font: "Calibri",
-        size: 15
+        count: "15"
     };
+    Memory.decks["staedte"] = Memory.deck;
+    Memory.scoreboard = [];
 })(Memory || (Memory = {}));
 //# sourceMappingURL=Aufg 4-1.js.map

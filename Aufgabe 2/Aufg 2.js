@@ -8,18 +8,18 @@ Ich habe diesen Code zusammen mit der Lerngruppe Gr�n geschrieben, angeleitet 
 var Memory;
 (function (Memory) {
     //Variablen deklarieren
-    var words = ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"];
-    var cards = [];
-    var numberCardPairs;
-    var numberPlayers;
-    var gameInfo;
-    var gameBoard;
+    let words = ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"];
+    let cards = [];
+    let numberCardPairs;
+    let numberPlayers;
+    let gameInfo;
+    let gameBoard;
     // Klasse Karte
-    var Card = (function () {
-        function Card(_cardContent) {
+    class Card {
+        constructor(_cardContent) {
             this.cardContent = _cardContent;
             /* zuf�lliger Kartenstatus generieren */
-            var randomStatus = Math.random();
+            let randomStatus = Math.random();
             if (randomStatus <= .5) {
                 this.cardStatus = "hidden";
             }
@@ -30,40 +30,39 @@ var Memory;
                 this.cardStatus = "visible";
             }
         }
-        Card.prototype.createCard = function () {
+        createCard() {
             this.card = document.createElement("div");
             this.card.innerText = this.cardContent;
             this.card.setAttribute("class", "card " + this.cardStatus);
             cards.push(this.card);
             return cards;
-        };
-        return Card;
-    }());
+        }
+    }
     // Klasse Spieler
-    var Player = (function () {
-        function Player(_name) {
+    class Player {
+        constructor(_name) {
             this.name = _name;
             this.score = 0;
         }
-        Player.prototype.scoreUp = function () {
+        scoreUp() {
             this.score += 10;
             return this.score;
-        };
-        Player.prototype.show = function () {
+        }
+        show() {
             this.player = document.createElement("div");
-            this.player.innerHTML = "\n        <span class=\"player-name\">" + this.name + "</span>\n        <span class=\"player-score\">Punkte: " + this.score + "</span>";
+            this.player.innerHTML = `
+        <span class="player-name">${this.name}</span>
+        <span class="player-score">Punkte: ${this.score}</span>`;
             gameInfo.appendChild(this.player);
-        };
-        return Player;
-    }());
+        }
+    }
     // Shuffle Array: Fisher-Yates Algorhitmus
     function shuffleArray(_array) {
-        for (var i = _array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            _a = [_array[j], _array[i]], _array[i] = _a[0], _array[j] = _a[1];
+        for (let i = _array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [_array[i], _array[j]] = [_array[j], _array[i]];
         }
         return _array;
-        var _a;
     }
     function main() {
         // Anzahl der Kartenpaare erfragen
@@ -78,21 +77,21 @@ var Memory;
         gameInfo = document.getElementById("game-info");
         gameBoard = document.getElementById("card-container");
         // Karten erzeugen
-        for (var i = 0; i < numberCardPairs; i++) {
-            var card = new Card(words[i]);
+        for (let i = 0; i < numberCardPairs; i++) {
+            let card = new Card(words[i]);
             card.createCard();
-            var pair = new Card(words[i]);
+            let pair = new Card(words[i]);
             pair.createCard();
         }
         // Karten mischen
         shuffleArray(cards);
         // Karten anzeigen
-        for (var i = 0; i < cards.length; i++) {
+        for (let i = 0; i < cards.length; i++) {
             gameBoard.appendChild(cards[i]);
         }
         // Spieler Anzeige generieren
-        for (var i = 0; i < numberPlayers; i++) {
-            var player = new Player("Spieler " + (i + 1));
+        for (let i = 0; i < numberPlayers; i++) {
+            let player = new Player("Spieler " + (i + 1));
             player.show();
         }
     }

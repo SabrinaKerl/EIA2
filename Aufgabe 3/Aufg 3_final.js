@@ -13,21 +13,21 @@ var Memory;
     //"as DOMContentLoaded-Event wird ausgel�st, wenn das initiale HTML-Dokument vollst�ndig geladen und geparst ist."
     //"Parser: Computerprogramm, das in der Informatik f�r die Zerlegung + Umwandlung einer Eingabe in ein f�r die Weiterverarbeitung geeigneteres Format zust�ndig ist. H�ufig werden Parser eingesetzt, um im Anschluss an den Analysevorgang die Semantik der Eingabe zu erschlie�en und daraufhin Aktionen durchzuf�hren."
     // >>Variablen deklarieren<<
-    var cardContent = ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"];
+    let cardContent = ["Apfel", "Banane", "Kiwi", "Birne", "Mango", "Erdbeere", "Melone", "Himbeere", "Pfirsich", "Ananas"];
     //Karteninhalt ist Typ String, wird in ein Array gepackt
-    var cardArray = [];
+    let cardArray = [];
     // leeres Array, in das die f�r das Spiel ben�tigten Karten als divs hineingespeichert werden
-    var openArray = [];
-    var openCards = 0;
-    var numPairs;
-    var numPlayers;
+    let openArray = [];
+    let openCards = 0;
+    let numPairs;
+    let numPlayers;
     //Festlegung, dass numPairs/numPlayers vom Typ numbers sind
-    var playerInfo;
-    var cardField;
+    let playerInfo;
+    let cardField;
     //Festlegung, dass playerInfo/cardField vom Typ HTMLElemente sind
-    var score = 0;
+    let score = 0;
     //0 ist Platzhalter f�r sp�teren tats�chlichen Punktestand
-    var name = "Spieler ";
+    let name = "Spieler ";
     //"Spieler" kommt als Wort auf die Spieleransicht
     function main() {
         //Aufbau: function bezeichnung (param1:typ, param2: typ, � ) : void { � }
@@ -40,7 +40,7 @@ var Memory;
         cardField = document.getElementById("card-div");
         // DOM abh�ngige Variablen deklarieren, Bezug von .ts ins .html - an welcher Stelle soll eingef�gt werden
         // Spielkarten erzeugen
-        for (var i = 0; i < numPairs; i++) {
+        for (let i = 0; i < numPairs; i++) {
             //Beginn des Z�hlvorgangs bei 0
             createCard(cardContent[i]);
             // cardContent an der Stelle i - wird als �bergabeparameter mitgegeben
@@ -48,11 +48,11 @@ var Memory;
         }
         randomMix(cardArray);
         // Karten mischen - Funktionsaufruf!
-        for (var i = 0; i < cardArray.length; i++) {
+        for (let i = 0; i < cardArray.length; i++) {
             // Karten dem Spielbrett hinzuf�gen
             cardField.appendChild(cardArray[i]);
         }
-        for (var i = 0; i < numPlayers; i++) {
+        for (let i = 0; i < numPlayers; i++) {
             // Spieler Anzeige generieren
             createPlayer(score, name + [i + 1]);
         }
@@ -78,9 +78,9 @@ var Memory;
         //Inhalt der Karte + Status (verdeckt/genommen/offen)
         //"Eine Funktion ist ein Codeblock, der f�r die Ausf�hrung einer bestimmten Aufgabe entwickelt wurde; sie wird ausgef�hrt, wenn sie "aufgerufen" wird."
         //vor Parametern immer Unterstrich!
-        var card = document.createElement("div");
+        let card = document.createElement("div");
         // div erzeugen f�r Karten
-        card.innerHTML = "<span>" + _textDerAufDieKarteSoll + "</span>";
+        card.innerHTML = `<span>${_textDerAufDieKarteSoll}</span>`;
         // //  innerHTML erwartet string `` | span = HTMLElement Container mit spezifischer Zuweisung | $ = 'string' + variable + 'string'
         // Text aus dem Array soll auf eine Karte 
         //***warum ist Zugriff auf cardContent array m�glich?!***
@@ -91,11 +91,11 @@ var Memory;
     }
     function createPlayer(_score, _name) {
         //Punktzahl + Spielername
-        var player = document.createElement("div");
+        let player = document.createElement("div");
         //div erzeugen f�r Spieler
-        var scoreField = document.createElement("div");
+        let scoreField = document.createElement("div");
         //div erzeugen f�r Punktzahl
-        var n = _score.toString();
+        let n = _score.toString();
         // Umwandeln einer number in string
         player.innerText = _name;
         //innerText immer Bef�llung f�r div
@@ -109,16 +109,15 @@ var Memory;
     // Mischen des Arrays
     function randomMix(_array) {
         // _array = das Array, das durchmischt werden soll
-        for (var i = _array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            _a = [_array[j], _array[i]], _array[i] = _a[0], _array[j] = _a[1];
+        for (let i = _array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [_array[i], _array[j]] = [_array[j], _array[i]];
         }
         return _array;
-        var _a;
         // Ausgabe -> Array ist jetzt durchgemischt
     }
     function clickHandler(_event) {
-        var cardClass = _event.target;
+        let cardClass = _event.target;
         // gibt ausl�sendes HTMLElement zur�ck
         if (cardClass.classList.contains("card")) {
             // "Die classList-Eigenschaft gibt den Klassennamen eines Elements als DOMTokenList-Objekt zur�ck. Diese Eigenschaft ist n�tzlich, um CSS-Klassen f�r ein Element hinzuzuf�gen, zu entfernen und umzuschalten."
@@ -143,11 +142,11 @@ var Memory;
         }
     }
     function matchCards() {
-        var openArray = filterCardsByClass("visible");
+        let openArray = filterCardsByClass("visible");
         // lass openArray ein HTMLElement Array sein, welches die Funktion filterCardsByClass ausf�hren soll
         if (openArray[0].children[0].innerHTML == openArray[1].children[0].innerHTML) {
             // Vergleich Array [0] zu Array [1] und deren jeweils erstes Kind
-            for (var s = 0; s < openArray.length; s++) {
+            for (let s = 0; s < openArray.length; s++) {
                 // lass s eine number sein, die den Wert 0 besitzt; lass s kleiner sein als die openArray.lenght; z�hle mit
                 openArray[s].classList.remove("visible");
                 // entferne  "visible"
@@ -155,7 +154,7 @@ var Memory;
             }
         }
         else {
-            for (var s = 0; s < openArray.length; s++) {
+            for (let s = 0; s < openArray.length; s++) {
                 // siehe oben
                 openArray[s].classList.remove("visible");
                 // entferne "visible"
@@ -170,7 +169,7 @@ var Memory;
         // openCards erh�lt den Wert 0
     }
     function winAlert() {
-        var cardsTaken = filterCardsByClass("hidden");
+        let cardsTaken = filterCardsByClass("hidden");
         // lass cardsTaken in HTMLElement Array sein, welches die Funktion filterCardsByClass ausf�hren soll
         if (cardsTaken.length == 0) {
             // wenn alle Karten den Status "taken" haben erscheint der Gewinnalarm
@@ -179,7 +178,7 @@ var Memory;
         cardsTaken = [];
     }
     function filterCardsByClass(_filter) {
-        return cardArray.filter(function (card) { return card.classList.contains(_filter); });
+        return cardArray.filter(card => card.classList.contains(_filter));
     }
 })(Memory || (Memory = {}));
 //# sourceMappingURL=Aufg 3_final.js.map

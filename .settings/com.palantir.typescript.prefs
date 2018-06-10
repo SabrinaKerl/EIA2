@@ -1,11 +1,11 @@
-compiler.codeGenTarget=ECMASCRIPT5
+compiler.codeGenTarget=ECMASCRIPT6
 compiler.compileOnSave=true
 compiler.generateDeclarationFiles=false
 compiler.inlineSourceMap=false
 compiler.inlineSources=false
 compiler.jsx=NONE
 compiler.mapSourceFiles=true
-compiler.moduleGenTarget=NONE
+compiler.moduleGenTarget=COMMONSJS
 compiler.moduleResolution=CLASSIC
 compiler.noFallthroughCasesInSwitch=false
 compiler.noImplicitAny=false

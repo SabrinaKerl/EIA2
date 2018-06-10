@@ -10,44 +10,44 @@ var Aufg4_Formular;
     window.addEventListener("load", init);
     function init(_event) {
         console.log("Init");
-        var insertButton = document.getElementById("insert");
-        var refreshButton = document.getElementById("refresh");
-        var searchButton = document.getElementById("searchButton");
+        let insertButton = document.getElementById("insert");
+        let refreshButton = document.getElementById("refresh");
+        let searchButton = document.getElementById("searchButton");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
         searchButton.addEventListener("click", search);
     }
     function insert(_event) {
-        var inputs = document.getElementsByTagName("input");
-        var genderButton = document.getElementById("male");
-        var matrikel = inputs[2].value;
-        var major, HTMLSelectElement = document.getELementById("select");
-        var studi;
+        let inputs = document.getElementsByTagName("input");
+        let genderButton = document.getElementById("male");
+        let matrikel = inputs[2].value;
+        let studi;
         studi = {
             name: inputs[0].value,
             firstname: inputs[1].value,
             matrikel: parseInt(matrikel),
-            major: major.value,
             age: parseInt(inputs[3].value),
+            major: inputs[4].value,
             gender: genderButton.checked
         };
         console.log(studi);
-        console.log(studi.age);
-        console.log(studi["age"]);
+        console.log(matrikel);
         // Datensatz im assoziativen Array unter der Matrikelnummer speichern
-        studiHomoAssoc[matrikel] = studi;
+        Aufg4_Formular.studiHomoAssoc[matrikel] = studi;
         // nur um das auch noch zu zeigen...
-        studiSimpleArray.push(studi);
+        Aufg4_Formular.studiSimpleArray.push(studi);
     }
     function refresh(_event) {
-        var output = document.getElementsByTagName("textarea")[0];
+        let output = document.getElementsByTagName("textarea")[0];
         output.value = "";
         // for-in-Schleife iteriert über die Schlüssel des assoziativen Arrays
-        for (var matrikel in studiHomoAssoc) {
-            var studi = studiHomoAssoc[matrikel];
-            var line = matrikel + ": ";
+        for (let matrikel in Aufg4_Formular.studiHomoAssoc) {
+            let studi = Aufg4_Formular.studiHomoAssoc[matrikel];
+            let line = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
             line += studi.gender ? "(M)" : "(F)";
+            line += ", ";
+            line += studi.major;
             output.value += line + "\n";
         }
         // zusätzliche Konsolenausgaben zur Demonstration
@@ -60,19 +60,21 @@ var Aufg4_Formular;
         console.groupEnd();*/
     }
     function search(_event) {
-        var output = document.getElementById("textarea2");
-        output.value = "";
-        var matrikel = parseInt(document.getELementById("matrikelNr").value);
-        var studi = studiHomoAssoc[matrikel];
+        let outputs = document.getElementById("textarea")[1];
+        outputs.value = "";
+        let inputs = document.getElementsByTagName("input");
+        let matrikel = inputs[7].value;
+        let studi = Aufg4_Formular.studiHomoAssoc[matrikel];
         if (typeof studi === "undefined") {
-            output.value += "Suchergebnis nicht vorhanden";
+            outputs.value += "Suchergebnis nicht vorhanden";
         }
         else {
-            var line = matrikel + ": ";
+            let line = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
-            line += studi.studyPath + ", ";
-            line += studi.gender ? "m�nnlich" : "weiblich";
-            output.value += line + "\n";
+            line += studi.gender ? "(M)" : "(F)";
+            line += ", ";
+            line += studi.major;
+            outputs.value += line + "\n";
         }
     }
 })(Aufg4_Formular || (Aufg4_Formular = {}));

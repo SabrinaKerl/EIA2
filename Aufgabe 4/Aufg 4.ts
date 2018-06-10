@@ -16,28 +16,26 @@ namespace Aufg4_Formular {
         let searchButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("searchButton");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        searchButton.addEventListener("click",search);
+        searchButton.addEventListener("click", search);
     }
 
     function insert(_event: Event): void {
         let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
         let genderButton: HTMLInputElement = <HTMLInputElement>document.getElementById("male");
         let matrikel: string = inputs[2].value;
-        let major. HTMLSelectElement = <HTMLSelectElement>document.getELementById("select");
         let studi: Studi;
         studi = {
             name: inputs[0].value,
             firstname: inputs[1].value,
             matrikel: parseInt(matrikel),
-            major: major.value,
             age: parseInt(inputs[3].value),
+            major: inputs[4].value,
             gender: genderButton.checked
         };
 
         console.log(studi);
-        console.log(studi.age);
-        console.log(studi["age"]);
-
+        console.log(matrikel);
+        
         // Datensatz im assoziativen Array unter der Matrikelnummer speichern
         studiHomoAssoc[matrikel] = studi;
 
@@ -55,6 +53,8 @@ namespace Aufg4_Formular {
             let line: string = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
             line += studi.gender ? "(M)" : "(F)";
+            line += ", ";
+            line += studi.major;
             output.value += line + "\n";
         }
 
@@ -68,21 +68,23 @@ namespace Aufg4_Formular {
         console.groupEnd();*/
     }
     function search(_event: Event): void {
-        let output: HTMLTextAreaElement = <HTMLTextAreaElement>document.getElementById("textarea2");
-        output.value = "";
-        let matrikel: number = parseInt((<HTMLInputElement>document.getELementById("matrikelNr")).value);
-        let studi: Studie = studiHomoAssoc[matrikel];
+        let outputs: HTMLTextAreaElement = <HTMLTextAreaElement>document.getElementById("textarea")[1];
+        outputs.value = "";
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
+        let matrikel: string = inputs[7].value;
+        let studi: Studi = studiHomoAssoc[matrikel];
         
         if (typeof studi === "undefined") {
-            output.value += "Suchergebnis nicht vorhanden"; 
+                outputs.value += "Suchergebnis nicht vorhanden";
             }
         
         else {
             let line: string = matrikel + ": ";
             line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
-            line += studi.studyPath + ", ";
-            line += studi.gender ? "männlich" : "weiblich";
-            output.value += line + "\n";
+            line += studi.gender ? "(M)" : "(F)";
+            line += ", ";
+            line += studi.major;
+            outputs.value += line + "\n";
             }
         }
 }
