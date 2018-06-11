@@ -40,8 +40,8 @@ namespace Aufgabe8 {
             age: parseInt(inputs[3].value),
             gender: genderButton.checked,
             studyPath: document.getElementsByTagName("select").item(0).value
-            
         };
+            
         let convert: string = JSON.stringify(studi);
         // JavaScript-JSON-Objekt wird in einen string umgewandelt
         console.log(convert);
