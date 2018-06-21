@@ -99,21 +99,21 @@ namespace Seaworld {
             crc2.fillStyle = "rgb(248, 248, 255)";
             crc2.fill();
         }
-        }
+    }
 
-        //Fische
+    //Fische
 
-        function drawFish(_x: number, _y: number): void {
+    function drawFish(_x: number, _y: number): void {
 
 
-            crc2.beginPath();
-            crc2.moveTo(_x, _y);
-            crc2.quadraticCurveTo(_x + 30, _y - 35, _x + 80, _y + 20);
-            crc2.lineTo(_x + 80, _y - 10);
-            crc2.quadraticCurveTo(_x + 30, _y + 35, _x, _y);
-            crc2.fillStyle = "rgb(148, 000, 211)";
-            crc2.stroke();
-            crc2.fill();
-        }
-    
+        crc2.beginPath();
+        crc2.moveTo(_x, _y);
+        crc2.quadraticCurveTo(_x + 30, _y - 35, _x + 80, _y + 20);
+        crc2.lineTo(_x + 80, _y - 10);
+        crc2.quadraticCurveTo(_x + 30, _y + 35, _x, _y);
+        crc2.fillStyle = "rgb(148, 000, 211)";
+        crc2.stroke();
+        crc2.fill();
+    }
+
 }
